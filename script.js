@@ -1,32 +1,30 @@
 const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
+getSumBtn.innerText = "Get Total Price";
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
-    // Get all price cells
-    const prices = document.querySelectorAll(".price");
+    // Select prices using the class expected by tests
+    const prices = document.querySelectorAll(".prices");
 
     let total = 0;
-
-    prices.forEach(price => {
-        total += Number(price.innerText);
+    prices.forEach(p => {
+        total += Number(p.innerText);
     });
 
-    // Check if total row already exists (avoid duplicate rows)
-    let totalRow = document.getElementById("total-row");
+    let ansRow = document.getElementById("ans");
 
-    if (!totalRow) {
-        totalRow = document.createElement("tr");
-        totalRow.id = "total-row";
+    if (!ansRow) {
+        ansRow = document.createElement("tr");
+        ansRow.id = "ans";
 
-        const totalCell = document.createElement("td");
-        totalCell.colSpan = 2;
-        totalCell.innerText = `Total Price: Rs ${total}`;
+        const td = document.createElement("td");
+        td.colSpan = 2;
+        td.innerText = total;
 
-        totalRow.appendChild(totalCell);
-        document.querySelector("table").appendChild(totalRow);
+        ansRow.appendChild(td);
+        document.querySelector("table").appendChild(ansRow);
     } else {
-        totalRow.firstChild.innerText = `Total Price: Rs ${total}`;
+        ansRow.firstChild.innerText = total;
     }
 };
 
